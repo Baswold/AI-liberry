@@ -1,0 +1,88 @@
+{
+  "name": "ai-library-frontend",
+  "version": "1.0.0",
+  "main": "main.js",
+  "homepage": "./",
+  "scripts": {
+    "start": "webpack serve --mode development",
+    "build": "webpack --mode production",
+    "electron": "electron .",
+    "electron-dev": "NODE_ENV=development electron .",
+    "dist": "npm run build && electron-builder",
+    "dist-mac": "npm run build && electron-builder --mac",
+    "dist-win": "npm run build && electron-builder --win",
+    "dist-all": "npm run build && electron-builder --mac --win",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["ai", "library", "desktop", "electron", "file-search"],
+  "author": "AI Library Team",
+  "license": "MIT",
+  "description": "Personal Database Assistant - AI-powered file search and organization",
+  "build": {
+    "appId": "com.ailibrary.app",
+    "productName": "AI Library",
+    "directories": {
+      "output": "dist-packages"
+    },
+    "files": [
+      "dist/**/*",
+      "main.js",
+      "preload.js",
+      "assets/**/*",
+      "../backend/**/*",
+      "!../backend/venv/lib/python3.11/site-packages/setuptools/**/*",
+      "!../backend/venv/lib/python3.11/site-packages/pip/**/*"
+    ],
+    "mac": {
+      "category": "public.app-category.productivity",
+      "icon": "assets/icon.png",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": ["x64", "arm64"]
+        }
+      ]
+    },
+    "win": {
+      "icon": "assets/icon.png",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        }
+      ]
+    },
+    "dmg": {
+      "title": "AI Library Installer",
+      "background": "assets/front_cover.png",
+      "window": {
+        "width": 600,
+        "height": 400
+      }
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "installerIcon": "assets/icon.png",
+      "uninstallerIcon": "assets/icon.png",
+      "installerHeaderIcon": "assets/icon.png"
+    }
+  },
+  "dependencies": {
+    "axios": "^1.7.9",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.28.0",
+    "@babel/preset-react": "^7.27.1",
+    "babel-loader": "^10.0.0",
+    "css-loader": "^7.1.2",
+    "electron": "^37.2.4",
+    "electron-builder": "^25.2.4",
+    "html-webpack-plugin": "^5.6.3",
+    "style-loader": "^4.0.0",
+    "webpack": "^5.101.0",
+    "webpack-cli": "^6.0.1"
+  }
+}
